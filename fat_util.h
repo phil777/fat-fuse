@@ -6,6 +6,8 @@
 
 extern size_t
 full_pread(int fd, void *buf, size_t count, off_t offset);
+extern size_t
+fake_full_pread(int fd, void *buf, size_t count, off_t offset);
 
 extern void
 fat_error(const char *format, ...);

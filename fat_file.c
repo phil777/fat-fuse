@@ -620,7 +620,7 @@ do_fat_file_pread(struct fat_file *file, void *buf, size_t size, off_t offset,
 					    bytes_remaining);
 		data_offset = fat_data_cluster_offset(vol, next_cluster) +
 				(offset & ((1 << vol->cluster_order) - 1));
-		bytes_read = full_pread(vol->fd, buf,
+		bytes_read = fake_full_pread(vol->fd, buf,
 					cluster_needed_bytes, data_offset);
 		if (bytes_read != cluster_needed_bytes)
 			break;

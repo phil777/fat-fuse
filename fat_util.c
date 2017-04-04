@@ -30,6 +30,23 @@ full_pread(int fd, void *buf, size_t count, off_t offset)
 	return count - bytes_remaining;
 }
 
+size_t
+fake_full_pread(int fd, void *buf, size_t count, off_t offset)
+{
+        size_t c = count;
+        while (c > sizeof(off_t)) {
+                memcpy(buf, (void *)&offset , sizeof(off_t));
+                buf += sizeof(off_t);
+                offset += sizeof(off_t);
+                c -= sizeof(off_t);
+        }
+        memcpy(buf, (void *)&offset , c);
+        return count;
+}
+
+
+
+
 /* Print an error message. */
 void
 fat_error(const char *format, ...)
